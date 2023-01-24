@@ -1,6 +1,6 @@
 # Bar or Column Chart with Error Bars in Chart.js
 
-I updated the code from @ilyankou to make the error bars plugin for chartjs v3
+I updated the code from [ilyankou](https://github.com/ilyankou) to make the error bars plugin for chartjs v3
 
 ![Bar chart with any number of series](./error-bars.png)
 
