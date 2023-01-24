@@ -122,19 +122,16 @@ $(document).ready(function() {
             }
           }
         },
-        tooltips: {
-          displayColors: false,
-          callbacks: {
-            label: function(tooltipItem, all) {
-              return all.datasets[tooltipItem.datasetIndex].label
-                + ': ' + tooltipItem.yLabel.toLocaleString()
-                + (all.datasets[tooltipItem.datasetIndex].errorBars[tooltipItem.label].plus ? ' ± ' + all.datasets[tooltipItem.datasetIndex].errorBars[tooltipItem.label].plus.toLocaleString() : '');
-            }
-          }
-        },
         plugins: {
           chartJsPluginErrorBars: {
             color: 'black',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label  + ': ' + context.formattedValue + ' ± ' + context.dataset.errorBars[context.label]['plus']
+              }
+            }
           }
         }
       }
