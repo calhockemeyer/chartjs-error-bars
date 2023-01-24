@@ -227,7 +227,7 @@
           }
 
           var errorBars = Array.isArray(errorBarData) ? errorBarData : [errorBarData];
-          var value = bar.value
+          var value = Number(bar.value)
           errorBars.forEach(function (errorBar, ei) {
             // error bar data for the barchart bar or point in linechart
             var errorBarColor = errorBarColors[ei % errorBarColors.length] ? errorBarColors[ei % errorBarColors.length] : bar.color;

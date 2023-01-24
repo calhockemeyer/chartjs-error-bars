@@ -88,7 +88,7 @@ $(document).ready(function() {
           onClick: null,
         },
         scales: {
-          xAxes: [{
+          x: {
             stacked: STACKED,
             scaleLabel: {
               display: X_AXIS !== '',
@@ -103,8 +103,8 @@ $(document).ready(function() {
                 return value.toLocaleString();
               }
             }
-          }],
-          yAxes: [{
+          },
+          y: {
             stacked: STACKED,
             beginAtZero: true,
             scaleLabel: {
@@ -120,7 +120,7 @@ $(document).ready(function() {
                 return value.toLocaleString()
               }
             }
-          }]
+          }
         },
         tooltips: {
           displayColors: false,
