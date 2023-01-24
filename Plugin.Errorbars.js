@@ -1,3 +1,8 @@
+/*!
+ * Author: Ilya Ilyankou (https://github.com/ilyankou)
+ * https://github.com/HandsOnDataViz/chartjs-error-bars
+*/
+
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('chart.js')) :
   typeof define === 'function' && define.amd ? define(['chart.js'], factory) :
@@ -45,19 +50,14 @@
         coords.push(bars.map(function (b, j) {
           // line charts do not have labels in their meta data, access global label array instead
           var barLabel = '';
-
-          if (!b._model.label) {
-            barLabel = chart.data.labels[j];
-          } else {
-            barLabel = b._model.label; // required for hierarchical
-          }
+          barLabel = chart.data.labels[j];
 
           return {
             label: barLabel,
             value: values[j],
-            x: b._model.x,
-            y: b._model.y,
-            color: b._model.borderColor
+            x: b.x,
+            y: b.y,
+            color: d.backgroundColor[j]
           };
         }));
       });
@@ -166,11 +166,11 @@
       var _this = this;
 
       // wait for easing value to reach 1 at the first render, after that draw immediately
-      chart.__renderedOnce = chart.__renderedOnce || easingValue === 1;
+      // chart.__renderedOnce = chart.__renderedOnce || easingValue === 1;
 
-      if (!chart.__renderedOnce) {
-        return;
-      }
+      // if (!chart.__renderedOnce) {
+      //   return;
+      // }
 
       options = Object.assign({}, defaultOptions, options); // error bar and barchart bar coords
 
@@ -187,7 +187,7 @@
 
       var horizontal = this._isHorizontal(chart);
 
-      var vScale = horizontal ? chart.scales['x-axis-0'] : chart.scales['y-axis-0'];
+      var vScale = horizontal ? chart.scales.x : chart.scales.y;
       var errorBarWidths = (Array.isArray(options.width) ? options.width : [options.width]).map(function (w) {
         return _this._computeWidth(chart, horizontal, w);
       });
@@ -227,7 +227,7 @@
           }
 
           var errorBars = Array.isArray(errorBarData) ? errorBarData : [errorBarData];
-          var value = vScale.getRightValue(bar.value);
+          var value = bar.value
           errorBars.forEach(function (errorBar, ei) {
             // error bar data for the barchart bar or point in linechart
             var errorBarColor = errorBarColors[ei % errorBarColors.length] ? errorBarColors[ei % errorBarColors.length] : bar.color;
@@ -245,7 +245,7 @@
       ctx.restore();
     }
   };
-  Chart.pluginService.register(ErrorBarsPlugin);
+  Chart.register(ErrorBarsPlugin);
 
   return ErrorBarsPlugin;
 
